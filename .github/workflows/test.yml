@@ -1,0 +1,11 @@
+permissions:
+  id-token: write # This is required for requesting the JWT
+name: oidc-test
+on: push
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: token
+        run: |
+          curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://test" | base64
